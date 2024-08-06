@@ -6,36 +6,47 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:22:57 by danpalac          #+#    #+#             */
-/*   Updated: 2024/08/06 21:39:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:55:44 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
+static void	ft_send_msg(int pid, char *s);
+
 int	main(int ac, char **av)
 {
-	char *bin;
-	
-	if (ac != 2)
+	int		pid;
+	char	*bits;
+
+	if (ac != 3)
 	{
-		ft_putstr_fd("Error: wrong number of arguments\n", 2);
-		return (1);
+		ft_printf("wrong number of arguments\n");
+		return (0);
 	}
-	else
+	pid = ft_atoi(av[1]);
+	bits = ft_strtobin(av[2]);
+	if (bits == NULL)
 	{
-		ft_putstr_fd("Client PID: ", 1);
-		ft_putnbr_fd(getpid(), 1);
-		ft_putstr_fd("\n", 1);
+		ft_printf("allocation went wrong\n");
+		return (0);
 	}
-	bin = ft_strtobin(av[1]);
-	if (bin == NULL)
+	ft_send_msg(pid, bits);
+	free(bits);
+}
+
+static void	ft_send_msg(int pid, char *s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		ft_putstr_fd("Error: wrong argument\n", 2);
-		return (1);
+		if (s[i] == '1')
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		i++;
+		usleep(80);
 	}
-	ft_putstr_fd("Binary: ", 1);
-	ft_putstr_fd(bin, 1);
-	ft_putstr_fd("\n", 1);
-	free(bin);
-	return (0);
 }
