@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 20:22:46 by danpalac          #+#    #+#             */
-/*   Updated: 2024/08/06 22:18:08 by danpalac         ###   ########.fr       */
+/*   Created: 2024/08/11 16:39:51 by danpalac          #+#    #+#             */
+/*   Updated: 2024/08/11 17:56:27 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "minitalk.h"
 
 static char	*ft_add_fs(char *start, char c);
 static void	ft_handler(int sig);
@@ -18,7 +18,7 @@ static void	ft_handler(int sig);
 int	main(void)
 {
 	ft_printf("Server PID: %u\n", getpid());
-	while (1 == 1)
+	while (1)
 	{
 		signal(SIGUSR1, ft_handler);
 		signal(SIGUSR2, ft_handler);
@@ -31,22 +31,20 @@ static void	ft_handler(int sig)
 {
 	static char	*bits;
 	static int	bitcount;
-	char		*tmp;
 
-	bitcount++;
 	if (bits == NULL)
 	{
 		bits = ft_strdup("");
-		bitcount = 1;
+		bitcount = 0;
 	}
-	if (sig == SIGUSR2)
-		bits = ft_add_fs(bits, '0');
-	else
+	if (sig == SIGUSR1)
 		bits = ft_add_fs(bits, '1');
+	else
+		bits = ft_add_fs(bits, '0');
+	bitcount++;
 	if (bitcount == 8)
 	{
-		tmp = ft_bintostr(bits);
-		ft_printf("%s", tmp);
+		ft_printf("%c", (unsigned char)ft_bintoa(bits));
 		free(bits);
 		bits = NULL;
 	}

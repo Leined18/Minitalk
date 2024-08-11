@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"server.h": "c",
-		"client.h": "c"
+		"client.h": "c",
+		"libft.h": "c"
 	}
 }

@@ -8,32 +8,31 @@ MKDIR = mkdir -p
 
 #********** Directories *********#
 
+SRCS_DIR = src
+INC_DIR = inc
 LIBFT_DIR = libft
 OBJ_DIR = obj
-SERVER_DIR = server
-CLIENT_DIR = client
 
 #************ Names *************#
 
 LIBFT = $(LIBFT_DIR)/libft.a
-NAME1 = $(SERVER_DIR)/server
-NAME2 = $(CLIENT_DIR)/client
+NAME1 = server
+NAME2 = client
 
 #*********** Sources ************#
 
-SRCS1 = $(SERVER_DIR)/src/server.c
-SRCS2 = $(CLIENT_DIR)/src/client.c
+SRCS1 = $(SRCS_DIR)/server.c
+SRCS2 = $(SRCS_DIR)/client.c
 
 #*********** Objects ************#
 
-OBJS1 = $(SRCS1:$(SERVER_DIR)/src/%.c=$(SERVER_DIR)/$(OBJ_DIR)/%.o)
-OBJS2 = $(SRCS2:$(CLIENT_DIR)/src/%.c=$(CLIENT_DIR)/$(OBJ_DIR)/%.o)
+OBJS1 = $(SRCS1:$(SRCS_DIR)/%.c=$(SRCS_DIR)/$(OBJ_DIR)/%.o)
+OBJS2 = $(SRCS2:$(SRCS_DIR)/%.c=$(SRCS_DIR)/$(OBJ_DIR)/%.o)
 
 #********** Includes ************#
 
-LIBFT_INC = -I$(LIBFT_DIR)/inc
-INC1 = -I$(SERVER_DIR)/inc
-INC2 = -I$(CLIENT_DIR)/inc
+LIBFT_INC	= -I$(LIBFT_DIR)/inc
+INC			= -I$(INC_DIR)
 
 #************ Rules *************#
 
@@ -47,20 +46,20 @@ $(NAME2): $(LIBFT) $(OBJS2)
 	@$(CC) -o $(NAME2) $(LIBFT) $(OBJS2) $(LDFLAGS)
 	@echo "\033[0;32m$(NAME2) has been created.\033[0m"
 
-$(SERVER_DIR)/$(OBJ_DIR)/%.o: $(SERVER_DIR)/src/%.c
+$(SRCS_DIR)/$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(MKDIR) $(@D)
-	@$(CC) $(CFLAGS) $(INC1) $(LIBFT_INC)  -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC) $(LIBFT_INC)  -c $< -o $@
 
-$(CLIENT_DIR)/$(OBJ_DIR)/%.o: $(CLIENT_DIR)/src/%.c
+$(SRCS_DIR)/$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(MKDIR) $(@D)
-	@$(CC) $(CFLAGS) $(INC2) $(LIBFT_INC)  -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC) $(LIBFT_INC)  -c $< -o $@
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
 
 clean:
-	@$(RM) $(SERVER_DIR)/$(OBJ_DIR)
-	@$(RM) $(CLIENT_DIR)/$(OBJ_DIR)
+	@$(RM) $(SRCS_DIR)/$(OBJ_DIR)
+	@$(RM) $(SRCS_DIR)/$(OBJ_DIR)
 
 fclean: clean
 	@$(RM) $(NAME1)
