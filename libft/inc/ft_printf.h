@@ -22,6 +22,7 @@
 # include <limits.h>
 # include "libft.h"
 
+int   ft_nbrlen(long n);
 int		ft_putnbr(int n);
 int		ft_putchar(int c);
 int		ft_printf(const char *str, ...);

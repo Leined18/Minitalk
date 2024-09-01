@@ -44,7 +44,7 @@ static void	ft_handler(int sig)
 	bitcount++;
 	if (bitcount == 8)
 	{
-		ft_printf("%c", (unsigned char)ft_bintoa(bits));
+		ft_printf("%c", (unsigned char)ft_bin2char(bits));
 		free(bits);
 		bits = NULL;
 	}

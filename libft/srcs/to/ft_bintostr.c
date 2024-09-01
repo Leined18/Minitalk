@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:41:56 by danpalac          #+#    #+#             */
-/*   Updated: 2024/07/26 20:52:53 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:54:42 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_bintostr(const char *bin)
 	j = 0;
 	while (j < bin_len)
 	{
-		str[i] = ft_bintoa(bin + j);
+		str[i] = ft_bin2char(bin + j);
 		i++;
 		j += 8;
 	}

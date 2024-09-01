@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:38:40 by danpalac          #+#    #+#             */
-/*   Updated: 2024/07/26 20:43:17 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:55:00 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strtobin(const char *str)
 	j = 0;
 	while (++i < len)
 	{
-		char_bin = ft_atobin((unsigned char)str[i]);
+		char_bin = ft_char2bin((unsigned char)str[i]);
 		if (!char_bin)
 			return (free(bin), NULL);
 		copy_bin(bin, char_bin, &j);

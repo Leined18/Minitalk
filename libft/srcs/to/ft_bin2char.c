@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_bintochar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 12:27:04 by danpalac          #+#    #+#             */
-/*   Updated: 2024/07/12 13:48:30 by danpalac         ###   ########.fr       */
+/*   Created: 2024/07/09 11:21:33 by danpalac          #+#    #+#             */
+/*   Updated: 2024/08/11 20:52:25 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_error(char *err, t_bool yeet)
+char	ft_bin2char(const char *bin)
 {
-	write(2, "\033[1;31m", 7);
-	write(2, err, ft_strlen(err));
-	write(2, "\033[0m", 4);
-	if (yeet)
-		exit(EXIT_FAILURE);
+	unsigned char	c;
+	int				k;
+
+	if (!bin)
+		return ('\0');
+	c = 0;
+	k = 0;
+	while (k < 8)
+	{
+		c <<= 1;
+		if (bin[k] == '1')
+			c |= 1;
+		k++;
+	}
+	return ((char)c);
 }

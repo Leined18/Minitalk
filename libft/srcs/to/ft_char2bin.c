@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_chartobin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 12:27:04 by danpalac          #+#    #+#             */
-/*   Updated: 2024/07/12 13:48:30 by danpalac         ###   ########.fr       */
+/*   Created: 2024/07/09 11:08:54 by danpalac          #+#    #+#             */
+/*   Updated: 2024/08/11 20:52:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_error(char *err, t_bool yeet)
+char	*ft_char2bin(unsigned char c)
 {
-	write(2, "\033[1;31m", 7);
-	write(2, err, ft_strlen(err));
-	write(2, "\033[0m", 4);
-	if (yeet)
-		exit(EXIT_FAILURE);
+	char	*ret;
+	int		k;
+
+	ret = malloc(9);
+	if (!ret)
+		return (NULL);
+	k = 7;
+	while (k >= 0)
+	{
+		if (c & (1 << k))
+			ret[7 - k] = '1';
+		else
+			ret[7 - k] = '0';
+		k--;
+	}
+	ret[8] = '\0';
+	return (ret);
 }

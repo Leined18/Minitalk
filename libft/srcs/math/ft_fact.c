@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bintoa.c                                        :+:      :+:    :+:   */
+/*   ft_fact.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 11:21:33 by danpalac          #+#    #+#             */
-/*   Updated: 2024/08/11 17:05:37 by danpalac         ###   ########.fr       */
+/*   Created: 2024/08/11 21:00:14 by danpalac          #+#    #+#             */
+/*   Updated: 2024/08/11 21:00:41 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	ft_bintoa(const char *bin)
+long	ft_fact(long n)
 {
-	unsigned char	c;
-	int				k;
-
-	if (!bin)
-		return ('\0');
-	c = 0;
-	k = 0;
-	while (k < 8)
-	{
-		c <<= 1;
-		if (bin[k] == '1')
-			c |= 1;
-		k++;
-	}
-	return ((char)c);
+	if (n <= 1)
+		return (1);
+	return (n * ft_fact(n - 1));
 }
+
