@@ -1,7 +1,8 @@
 {
-	"files.associations": {
-		"server.h": "c",
-		"client.h": "c",
-		"libft.h": "c"
-	}
+    "files.associations": {
+        "minitalk.h": "c",
+        "signal.h": "c",
+        "libft.h": "c",
+        "ft_printf.h": "c"
+    }
 }

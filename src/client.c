@@ -3,50 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:22:57 by danpalac          #+#    #+#             */
-/*   Updated: 2024/08/11 16:04:34 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/09/01 20:48:18 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	ft_send_msg(int pid, char *s);
-
-int	main(int ac, char **av)
+/* void	handler(int signum, siginfo_t *info, void *context)
 {
-	int		pid;
-	char	*bits;
+	kill(SIGUSR1);
+	kill(SIGUSR2);
+} */
 
-	if (ac != 3)
-	{
-		ft_printf("wrong number of arguments\n");
-		return (0);
-	}
-	pid = ft_atoi(av[1]);
-	bits = ft_strtobin(av[2]);
-	if (bits == NULL)
-	{
-		ft_printf("allocation went wrong\n");
-		return (0);
-	}
-	ft_send_msg(pid, bits);
-	free(bits);
-}
-
-static void	ft_send_msg(int pid, char *s)
+int	main(int argc, char **argv)
 {
-	size_t	i;
+	int pid;
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '1')
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		i++;
-		usleep(80);
-	}
+	if (argc != 3)
+		ft_error("", 1);
+	pid = ft_atoi(argv[2]);
 }
