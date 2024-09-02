@@ -65,7 +65,12 @@ static void	ft_handler_sigusr(int signum)
 int	main(int argc, char **argv)
 {
 	if (argc != 3 || !ft_isstrnum(argv[1]))
-		error(NULL, "client: error invalid arguments.\n");
+	{
+		ft_error("client: invalid arguments.\n", 0);
+		ft_putstr_color_fd(YELLOW, "correct format: [./client <PID> <STR>].\n",
+			2);
+		ft_error("", 1);
+	}
 	signal(SIGUSR1, ft_handler_sigusr);
 	signal(SIGUSR2, ft_handler_sigusr);
 	send_bit(ft_atoi(argv[1]), argv[2]);
