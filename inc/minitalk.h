@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/18 08:32:18 by danpalac          #+#    #+#             */
+/*   Updated: 2024/09/18 08:32:19 by danpalac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINITALK_H
 # define MINITALK_H
 
@@ -15,14 +27,5 @@
 # define PURPLE	"\033[0;35m"
 # define CYAN	"\033[0;36m"
 # define WHITE	"\033[0;37m"
-
-// Definición de la estructura s_server
-typedef struct s_server
-{
-	int	client;
-	int	count;
-	int	res;
-	int	pid;
-}		t_server;
 
 #endif // MINITALK_H

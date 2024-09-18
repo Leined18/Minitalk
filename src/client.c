@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
+/*   Updated: 2024/09/18 08:23:59 by danpalac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minitalk.h"
 
@@ -7,6 +18,7 @@ static void	error(char *str, char *msg)
 		free(str);
 	ft_error(msg, 1);
 }
+
 static int	send_null(int pid, char *str)
 {
 	static int	i = 0;

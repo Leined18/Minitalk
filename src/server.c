@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:39:51 by danpalac          #+#    #+#             */
-/*   Updated: 2024/09/01 20:28:31 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:31:47 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ void	handler(int signum, siginfo_t *info, void *context)
 		error(pid, message);
 }
 
-
 int	main(void)
 {
 	struct sigaction	sa;
-	sigset_t		b_mask;
+	sigset_t			b_mask;
 
 	sigemptyset(&b_mask);
 	sigaddset(&b_mask, SIGINT);
