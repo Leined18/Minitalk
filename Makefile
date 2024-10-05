@@ -114,12 +114,12 @@ $(LIBFT):
 clean:
 	@$(RM) -rf $(OBJS_DIR)
 	@make clean -sC $(LIBFT_DIR)
-	@echo "Object files cleaned!"
+	@echo "$(BLUE)Object files cleaned!"
 
 fclean: clean
 	@$(RM) -rf $(SERVER) $(CLIENT) $(SERVER_BONUS) $(CLIENT_BONUS)
 	@make fclean -sC $(LIBFT_DIR)
-	@echo "Executable files cleaned!"
+	@echo "$(CYAN)Executable files cleaned!"
 
 re: fclean all
 

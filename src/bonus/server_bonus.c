@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:39:51 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/04 12:02:05 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/05 22:20:24 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	handler(int signum, siginfo_t *info, void *context)
 	static int	bits = 0;
 	static int	pid = 0;
 	static char	*message = 0;
-    
+
 	(void)context;
 	if (info->si_pid)
 		pid = info->si_pid;
