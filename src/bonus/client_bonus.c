@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/04 12:02:00 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:44:08 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "client_bonus.h"
 
 static void	error(char *str, char *msg)
 {
@@ -69,18 +69,17 @@ static void	ft_handler_sigusr(int signum)
 	if (signum == SIGUSR1)
 		end = send_bit(0, 0);
 	else if (signum == SIGUSR2)
-		error(NULL, "Client: server ended unexpectly.");
+		error(NULL, BAD_SIGNAL);
 	if (end)
-		ft_successful("client: operation successful.\n", 1);
+		ft_successful(SUCCESS, 1);
 }
 
 int	main(int argc, char **argv)
 {
 	if (argc != 3 || !ft_isstrnum(argv[1]))
 	{
-		ft_error("client: invalid arguments.\n", 0);
-		ft_putstr_color_fd(YELLOW, "correct format: [./client <PID> <STR>].\n",
-			2);
+		ft_error("Error", 0);
+		ft_putstr_color_fd(YELLOW, USAGE, 2);
 		ft_error("", 1);
 	}
 	signal(SIGUSR1, ft_handler_sigusr);

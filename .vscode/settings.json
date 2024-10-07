@@ -1,3 +1,10 @@
 {
-  "C_Cpp_Runner.msvcBatchPath": ""
+"C_Cpp_Runner.msvcBatchPath": "",
+"files.associations": {
+	"client.h": "c",
+	"minitalk_bonus.h": "c",
+	"shared.h": "c",
+	"signal.h": "c",
+	"libft.h": "c"
+}
 }

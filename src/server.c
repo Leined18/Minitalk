@@ -6,11 +6,11 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 17:13:08 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:39:06 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "shared.h"
 
 char	*print_and_free(char *message)
 {

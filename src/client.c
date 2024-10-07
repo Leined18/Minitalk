@@ -6,24 +6,17 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 17:23:18 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:16:33 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-static void	error(char *str, char *msg)
+static void	send_signal(int pid, int signal)
 {
-	if (str)
-		str = NULL;
-	ft_error(msg, 1);
-}
-
-void	send_signal(pid_t pid, int signal, int utime)
-{
-	usleep(utime);
+	usleep(WAIT);
 	if (kill(pid, signal) == -1)
-		error(0, 0);
+		ft_error(BAD_SIGNAL, 1);
 }
 
 static int	send_null(int pid, int utime)
@@ -34,7 +27,7 @@ static int	send_null(int pid, int utime)
 	while (i++ != 8)
 	{
 		usleep(utime);
-		send_signal(pid, CHAR_0, 10);
+		send_signal(pid, CHAR_0);
 	}
 	return (1);
 }
@@ -52,14 +45,13 @@ static int	send_bits(int pid, char *message)
 		if (byte_index < len)
 		{
 			if (message[byte_index] & (0x80 >> (bits % 8)))
-				send_signal(pid, CHAR_1, 176);
+				send_signal(pid, CHAR_1);
 			else
-				send_signal(pid, CHAR_0, 176);
+				send_signal(pid, CHAR_0);
 		}
-		send_signal(pid, 0, 300);
 	}
 	bits = -1;
-	return (send_null(pid, 500));
+	return (send_null(pid, 1200));
 }
 
 int	main(int argc, char **argv)
@@ -70,6 +62,7 @@ int	main(int argc, char **argv)
 		ft_putstr_color_fd(YELLOW, USAGE, 2);
 		ft_error("", 1);
 	}
+	usleep(WAIT * 2);
 	send_bits(ft_atoi(argv[1]), argv[2]);
 	return (0);
 }

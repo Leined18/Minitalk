@@ -6,28 +6,20 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:39:51 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/05 22:20:24 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:38:11 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "shared.h"
 
-void	error(int pid, char *str)
-{
-	if (str)
-		free(str);
-	kill(pid, SIGUSR2);
-	ft_error("server: unexpected error.", 1);
-}
-
-char	*print_and_free(char *message)
+static char	*print_and_free(char *message)
 {
 	ft_putstr_fd(message, 1);
 	free(message);
 	return (NULL);
 }
 
-void	handler(int signum, siginfo_t *info, void *context)
+static void	handler(int signum, siginfo_t *info, void *context)
 {
 	static char	c = 0xFF;
 	static int	bits = 0;
@@ -50,8 +42,7 @@ void	handler(int signum, siginfo_t *info, void *context)
 		bits = 0;
 		c = 0xFF;
 	}
-	if (kill(pid, SIGUSR1) == -1)
-		error(pid, message);
+	kill(pid, SIGUSR1);
 }
 
 int	main(void)

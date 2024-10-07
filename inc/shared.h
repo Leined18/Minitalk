@@ -1,6 +1,7 @@
 #ifndef SHARED_H
 # define SHARED_H
 
+# include "client.h"
 # include "libft.h"
 # include <signal.h>
 # include <stdlib.h>
