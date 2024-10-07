@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 17:07:56 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:23:18 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	send_bits(int pid, char *message)
 			else
 				send_signal(pid, CHAR_0, 176);
 		}
-		send_signal(pid, 0, 176);
+		send_signal(pid, 0, 300);
 	}
 	bits = -1;
 	return (send_null(pid, 500));
