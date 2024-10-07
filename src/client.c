@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/05 22:20:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:07:36 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,51 @@ static void	error(char *str, char *msg)
 	ft_error(msg, 1);
 }
 
-static int	send_null(int pid, char *str)
+static void	send_null(int pid, char *str)
 {
 	int	i;
 
 	i = 0;
 	while (i++ != 8)
 	{
-		usleep(10);
 		if (kill(pid, SIGUSR1) == -1)
 			error(str, 0);
-		usleep(10);
+		usleep(1000);
 	}
-	return (1);
 }
 
-static int	send_bits(int pid, char *message)
+static void	send_bits(int pid, char *message, int bits)
 {
-	static int	bits = -1;
-	int			byte_index;
+	int	byte_index;
+	int	len;
 
-	while (message[++bits / 8] && bits < 8 * (int)ft_strlen(message))
+	if (!message[0])
+		return ((void)send_null(pid, message));
+	len = ft_strlen(message);
+	if (bits >= 8 * len)
 	{
-		byte_index = bits / 8;
-		if (byte_index < (int)ft_strlen(message))
-		{
-			usleep(7);
-			if (message[byte_index] & (0x80 >> (bits % 8)))
-			{
-				if (kill(pid, SIGUSR2) == -1)
-					ft_error("", 1);
-				usleep(7);
-			}
-			else if (kill(pid, SIGUSR1) == -1)
-				ft_error("", 1);
-			usleep(7);
-		}
-		usleep(10);
+		send_null(pid, message);
+		return ;
 	}
-	bits = -1;
-	return (send_null(pid, message));
+	byte_index = bits / 8;
+	if (message[byte_index] & (0x80 >> (bits % 8)))
+	{
+		if (kill(pid, SIGUSR2) == -1)
+			error(message, "Error sending SIGUSR2");
+	}
+	else
+	{
+		if (kill(pid, SIGUSR1) == -1)
+			error(message, "Error sending SIGUSR1");
+	}
+	usleep(156);
+	send_bits(pid, message, bits + 1);
 }
 
 int	main(int argc, char **argv)
 {
+	int	pid;
+
 	if (argc != 3 || !ft_isstrnum(argv[1]))
 	{
 		ft_error("client: invalid arguments.\n", 0);
@@ -70,6 +71,7 @@ int	main(int argc, char **argv)
 			2);
 		ft_error("", 1);
 	}
-	send_bits(ft_atoi(argv[1]), argv[2]);
+	pid = ft_atoi(argv[1]);
+	send_bits(pid, argv[2], 0);
 	return (0);
 }

@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",  // Nombre de la tarea
+      "type": "shell",    // Tipo de tarea
+      "command": "make",  // Comando para ejecutar
+      "args": [
+        "all" // Nombre de la regla en el Makefile que deseas ejecutar
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true // Esta tarea se establece como la tarea de construcción predeterminada
+      },
+      "problemMatcher": ["$gcc"], // Matcher de problemas para captar errores de compilación
+      "detail": "Compiles the client using Makefile." // Detalle de la tarea
+    }
+	{
+      "label": "Clean",  // Nombre de la tarea
+      "type": "shell",    // Tipo de tarea
+      "command": "make",  // Comando para ejecutar
+      "args": [
+        "fclean" // Nombre de la regla en el Makefile que deseas ejecutar
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true // Esta tarea se establece como la tarea de construcción predeterminada
+      },
+      "problemMatcher": ["$gcc"], // Matcher de problemas para captar errores de compilación
+      "detail": "Compiles the client using Makefile." // Detalle de la tarea
+    }
+  ]
+}

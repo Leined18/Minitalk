@@ -5,11 +5,11 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [],
+      "args": ["2855195", "hola"],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/danpalac/sgoinfre/repositories/Minitalk/src",
-      "program": "/home/danpalac/sgoinfre/repositories/Minitalk/src/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/client",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -18,7 +18,9 @@
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }
-      ]
+      ],
+      "preLaunchTask": "Build",
+      "postDebugTask": "Clean"
     }
   ]
 }

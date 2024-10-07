@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:39:51 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/05 22:55:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:07:26 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char	*print_and_free(char *message)
 
 void	ft_handler(int signum)
 {
-	static char	c = 0x00;
+	static char	c = 0xFF;
 	static int	bits = 0;
 	static char	*message = 0;
 
 	if (signum == SIGUSR1)
-		c &= ~(0x80 >> bits);
+		c ^= 0x80 >> bits;
 	else if (signum == SIGUSR2)
 		c |= 0x80 >> bits;
 	if (++bits == 8)
@@ -36,7 +36,7 @@ void	ft_handler(int signum)
 		else
 			message = print_and_free(message);
 		bits = 0;
-		c = 0x00;
+		c = 0xFF;
 	}
 }
 
