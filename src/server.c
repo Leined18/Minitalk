@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:39:51 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/05 22:55:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:35:47 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "server.h"
 
 char	*print_and_free(char *message)
 {

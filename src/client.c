@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/05 22:20:03 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:35:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "client.h"
 
 static void	error(char *str, char *msg)
 {
@@ -26,12 +26,17 @@ static int	send_null(int pid, char *str)
 	i = 0;
 	while (i++ != 8)
 	{
-		usleep(10);
-		if (kill(pid, SIGUSR1) == -1)
+		usleep(156);
+		if (kill(pid, CHAR_0) == -1)
 			error(str, 0);
-		usleep(10);
 	}
 	return (1);
+}
+
+void	send_signal(pid_t pid, int signal)
+{
+	if (kill(pid, signal) == -1)
+		ft_error("client: signal error.\n", 1);
 }
 
 static int	send_bits(int pid, char *message)
@@ -44,18 +49,16 @@ static int	send_bits(int pid, char *message)
 		byte_index = bits / 8;
 		if (byte_index < (int)ft_strlen(message))
 		{
-			usleep(7);
 			if (message[byte_index] & (0x80 >> (bits % 8)))
 			{
-				if (kill(pid, SIGUSR2) == -1)
-					ft_error("", 1);
-				usleep(7);
+				send_signal(pid, CHAR_1);
+				usleep(100);
 			}
-			else if (kill(pid, SIGUSR1) == -1)
-				ft_error("", 1);
-			usleep(7);
+			else
+				send_signal(pid, CHAR_0);
+			usleep(100);
 		}
-		usleep(10);
+		usleep(50);
 	}
 	bits = -1;
 	return (send_null(pid, message));
@@ -65,9 +68,8 @@ int	main(int argc, char **argv)
 {
 	if (argc != 3 || !ft_isstrnum(argv[1]))
 	{
-		ft_error("client: invalid arguments.\n", 0);
-		ft_putstr_color_fd(YELLOW, "correct format: [./client <PID> <STR>].\n",
-			2);
+		ft_error("Error", 0);
+		ft_putstr_color_fd(YELLOW, USAGE, 2);
 		ft_error("", 1);
 	}
 	send_bits(ft_atoi(argv[1]), argv[2]);
