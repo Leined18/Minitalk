@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 13:48:35 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:07:56 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,47 @@ static void	error(char *str, char *msg)
 	ft_error(msg, 1);
 }
 
-static int	send_null(int pid, char *str)
+void	send_signal(pid_t pid, int signal, int utime)
+{
+	usleep(utime);
+	if (kill(pid, signal) == -1)
+		error(0, 0);
+}
+
+static int	send_null(int pid, int utime)
 {
 	int	i;
 
 	i = 0;
 	while (i++ != 8)
 	{
-		usleep(156);
-		if (kill(pid, CHAR_0) == -1)
-			error(str, 0);
+		usleep(utime);
+		send_signal(pid, CHAR_0, 10);
 	}
 	return (1);
-}
-
-void	send_signal(pid_t pid, int signal, char *msg)
-{
-	if (kill(pid, signal) == -1)
-		error(msg, 0);
 }
 
 static int	send_bits(int pid, char *message)
 {
 	static int	bits = -1;
 	int			byte_index;
+	int			len;
 
-	while (message[++bits / 8] && bits < 8 * (int)ft_strlen(message))
+	len = ft_strlen(message);
+	while (message[++bits / 8] && bits < 8 * len)
 	{
 		byte_index = bits / 8;
-		if (byte_index < (int)ft_strlen(message))
+		if (byte_index < len)
 		{
 			if (message[byte_index] & (0x80 >> (bits % 8)))
-			{
-				send_signal(pid, CHAR_1, message);
-				usleep(100);
-			}
+				send_signal(pid, CHAR_1, 176);
 			else
-				send_signal(pid, CHAR_0, message);
-			usleep(100);
+				send_signal(pid, CHAR_0, 176);
 		}
-		usleep(50);
+		send_signal(pid, 0, 176);
 	}
 	bits = -1;
-	return (send_null(pid, message));
+	return (send_null(pid, 500));
 }
 
 int	main(int argc, char **argv)
