@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 18:44:08 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:22:29 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	send_null(int pid, char *str)
 	if (i++ != 8)
 	{
 		if (kill(pid, SIGUSR1) == -1)
-			error(str, 0);
+			error(str, BAD_SIGNAL);
 		return (0);
 	}
 	free(str);
@@ -52,10 +52,10 @@ static int	send_bit(int pid, char *str)
 		if (message[byte_index] & (0x80 >> (bits % 8)))
 		{
 			if (kill(s_pid, SIGUSR2) == -1)
-				error(message, 0);
+				error(message, BAD_SIGNAL);
 		}
 		else if (kill(s_pid, SIGUSR1) == -1)
-			error(message, 0);
+			error(message, BAD_SIGNAL);
 		return (0);
 	}
 	return (send_null(s_pid, message));
