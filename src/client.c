@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 13:35:16 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:48:35 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	error(char *str, char *msg)
 {
 	if (str)
-		free(str);
+		str = NULL;
 	ft_error(msg, 1);
 }
 
@@ -33,10 +33,10 @@ static int	send_null(int pid, char *str)
 	return (1);
 }
 
-void	send_signal(pid_t pid, int signal)
+void	send_signal(pid_t pid, int signal, char *msg)
 {
 	if (kill(pid, signal) == -1)
-		ft_error("client: signal error.\n", 1);
+		error(msg, 0);
 }
 
 static int	send_bits(int pid, char *message)
@@ -51,11 +51,11 @@ static int	send_bits(int pid, char *message)
 		{
 			if (message[byte_index] & (0x80 >> (bits % 8)))
 			{
-				send_signal(pid, CHAR_1);
+				send_signal(pid, CHAR_1, message);
 				usleep(100);
 			}
 			else
-				send_signal(pid, CHAR_0);
+				send_signal(pid, CHAR_0, message);
 			usleep(100);
 		}
 		usleep(50);
