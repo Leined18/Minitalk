@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 18:39:06 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:12:05 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*print_and_free(char *message)
 
 void	ft_handler(int signum)
 {
-	static char	c = 0x00;
+	static char	c = 0xFF;
 	static int	bits = 0;
 	static char	*message = 0;
 
@@ -33,10 +33,10 @@ void	ft_handler(int signum)
 	{
 		if (c)
 			message = ft_straddc(message, c);
-		else
+		else if (message)
 			message = print_and_free(message);
 		bits = 0;
-		c = 0x00;
+		c = 0xFF;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: danpalac <danpalac@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 08:23:00 by danpalac          #+#    #+#             */
-/*   Updated: 2024/10/07 19:22:29 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:27:20 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ static void	ft_handler_sigusr(int signum)
 int	main(int argc, char **argv)
 {
 	if (argc != 3 || !ft_isstrnum(argv[1]))
-	{
-		ft_error("Error", 0);
-		ft_putstr_color_fd(YELLOW, USAGE, 2);
-		ft_error("", 1);
-	}
+		ft_error(USAGE, 1);
 	signal(SIGUSR1, ft_handler_sigusr);
 	signal(SIGUSR2, ft_handler_sigusr);
 	send_bit(ft_atoi(argv[1]), argv[2]);
