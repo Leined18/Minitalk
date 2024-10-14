@@ -33,7 +33,7 @@ static int	send_null(int pid, int utime)
 	return (1);
 }
 
-static void	send_byte(int pid, char byte)
+static void	send_bits(int pid, char byte)
 {
 	int	bits;
 
@@ -48,7 +48,7 @@ static void	send_byte(int pid, char byte)
 	}
 }
 
-static int	send_bits(int pid, char *message)
+static int	send_bytes(int pid, char *message)
 {
 	int	byte_index;
 	int	len;
@@ -57,17 +57,17 @@ static int	send_bits(int pid, char *message)
 	byte_index = 0;
 	while (byte_index < len)
 	{
-		send_byte(pid, message[byte_index]);
+		send_bits(pid, message[byte_index]);
 		byte_index++;
 	}
-	return (send_null(pid, 400));
+	return (send_null(pid, 700));
 }
 
 int	main(int argc, char **argv)
 {
 	if (argc != 3 || !ft_isstrnum(argv[1]))
 		ft_error(USAGE, 1);
-	usleep(WAIT * 2);
-	send_bits(ft_atoi(argv[1]), argv[2]);
+	usleep(WAIT + 579);
+	send_bytes(ft_atoi(argv[1]), argv[2]);
 	return (0);
 }
