@@ -5,3 +5,12 @@
  cd Minitalk
  make all
  ```
+# Executing
+
+```
+$terminal 1: ./server
+-> PID : *****
+----------------------------------
+
+$terminal 2: ./client "SERVER_PID" "YOUR STRING"
+```
